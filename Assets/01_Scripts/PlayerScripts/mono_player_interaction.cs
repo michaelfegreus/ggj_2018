@@ -12,6 +12,8 @@ public class mono_player_interaction : MonoBehaviour {
 	public GameObject[] nearbyInteractables;
 	// Cartoon thing that pops up above the player's head to notify that you're in front of something interactable.
 	public GameObject exclamationUI;
+	// Cell Bars UI
+	public GameObject[] cellBarsUI;
 
 	public bool inDialogue;
 
@@ -124,6 +126,11 @@ public class mono_player_interaction : MonoBehaviour {
 
 		bool interactablesEmpty = true;
 
+		// Turn off all of the bars here. They turn on if corresponding trigger volumes are found.
+		for (int i = 0; i < cellBarsUI.Length; i++) {
+			cellBarsUI [i].SetActive (false);
+		}		
+
 		for (int i = 0; i < nearbyInteractables.Length; i++) {
 			if (nearbyInteractables [i] != null) {
 				// In case the item was deactivated, but not destroyed (i.e. Key Items), take it out of the array.
@@ -134,8 +141,19 @@ public class mono_player_interaction : MonoBehaviour {
 				}
 				// UI on!
 				exclamationUI.SetActive (true);
-				return;
+				
+				if (nearbyInteractables [i].tag.Trim ().Equals ("CellZoneLow".Trim ())) {
+					cellBarsUI [0].SetActive (true);
+				}
+				if (nearbyInteractables [i].tag.Trim ().Equals ("CellZoneMed".Trim ())) {
+					cellBarsUI [1].SetActive (true);
+				}
+				if (nearbyInteractables [i].tag.Trim ().Equals ("CellZoneHigh".Trim ())) {
+					cellBarsUI [2].SetActive (true);
+				}
+				//return;
 			}
+			
 		}
 		if (interactablesEmpty) {
 			// UI off
@@ -177,7 +195,7 @@ public class mono_player_interaction : MonoBehaviour {
 
 	// Check to see if the player entered the range of interactable objects.
 	void OnTriggerEnter2D(Collider2D col){
-		if (col.tag.Trim().Equals("Item".Trim()) || col.tag.Trim().Equals("KeyItem".Trim()) || col.tag.Trim().Equals("Dialogue".Trim()) || col.tag.Trim().Equals("Interactable".Trim()) || col.tag.Trim().Equals("Actor".Trim())){
+	if (col.tag.Trim().Equals("CellZoneLow".Trim()) || col.tag.Trim().Equals("CellZoneMed".Trim()) || col.tag.Trim().Equals("CellZoneHigh".Trim()) || col.tag.Trim().Equals("Interactable".Trim()) || col.tag.Trim().Equals("Actor".Trim())){
 			// UI on!
 			exclamationUI.SetActive (true);
 			// Add to array of nearby interactables.
@@ -194,7 +212,7 @@ public class mono_player_interaction : MonoBehaviour {
 
 	// Check to see if the player exited the range of interactable objects.
 	void OnTriggerExit2D(Collider2D col){
-		if (col.tag.Trim().Equals("Item".Trim()) || col.tag.Trim().Equals("KeyItem".Trim()) || col.tag.Trim().Equals("Dialogue".Trim()) || col.tag.Trim().Equals("Interactable".Trim()) ||  col.tag.Trim().Equals("Actor".Trim())){
+	if (col.tag.Trim().Equals("CellZoneLow".Trim()) || col.tag.Trim().Equals("CellZoneMed".Trim()) || col.tag.Trim().Equals("CellZoneHigh".Trim()) || col.tag.Trim().Equals("Interactable".Trim()) ||  col.tag.Trim().Equals("Actor".Trim())){
 			// Remove from list of nearby interactables.
 			for (int i = 0; i < nearbyInteractables.Length; i++) {
 				// Remove the interactable from the array.
