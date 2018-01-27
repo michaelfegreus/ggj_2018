@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class mono_player_interaction : MonoBehaviour {
 
@@ -122,9 +123,19 @@ public class mono_player_interaction : MonoBehaviour {
 		}
 		return nearestObjectIndex;
 	}
-
-	// If there are no nearby interactable objects, turn off the exclamation object UI.
-	void CheckExclamationUI(){
+    public void DeactivateZone()
+    {
+        for (int i = 0; i < nearbyInteractables.Length; i++)
+        {
+            if (nearbyInteractables[i] != null)
+            {
+                Init.activezones[SceneManager.GetActiveScene().buildIndex][(int) nearbyInteractables[i].transform.parent.name[8] - 48] = false;
+                nearbyInteractables[i].SetActive(false);
+            }
+        }
+    }
+    // If there are no nearby interactable objects, turn off the exclamation object UI.
+    void CheckExclamationUI() {
 
 		bool interactablesEmpty = true;
 
@@ -132,7 +143,17 @@ public class mono_player_interaction : MonoBehaviour {
 		for (int i = 0; i < cellBarsUI.Length; i++) {
 			cellBarsUI [i].SetActive (false);
 		}
-		for (int i = 0; i < nearbyInteractables.Length; i++) {
+        bool any_left = false;
+        for (int j = 0; j < Init.events[SceneManager.GetActiveScene().buildIndex]; j++)
+        {           
+            any_left = any_left || Init.activezones[SceneManager.GetActiveScene().buildIndex][j];
+        }
+        if (!any_left)
+        {
+            cellBarsUI[4].SetActive(true);
+            return;
+        }
+        for (int i = 0; i < nearbyInteractables.Length; i++) {
 			if (nearbyInteractables [i] != null) {
 				// In case the item was deactivated, but not destroyed (i.e. Key Items), take it out of the array.
 				if (nearbyInteractables [i].activeInHierarchy == false) {

@@ -8,6 +8,7 @@ public class text_script : MonoBehaviour {
     public TextAsset textFile;
     public string[] textLines;
     public Text theText;
+    public mono_player_interaction player;
     private int currentLine = 0;
 	// Use this for initialization
 	void Start () {
@@ -30,8 +31,12 @@ public class text_script : MonoBehaviour {
             theText.text = textLines[currentLine];
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                currentLine++;
-                currentLine = currentLine % textLines.Length;
+                currentLine++;                
+            }
+            if (currentLine >= textLines.Length)
+            {
+                player.DeactivateZone();
+                NoSignal();
             }
         }
         else

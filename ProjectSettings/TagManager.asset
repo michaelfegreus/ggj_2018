@@ -8,6 +8,7 @@ TagManager:
   - CellZoneLow
   - CellZoneMed
   - CellZoneHigh
+  - CellZone
   layers:
   - Default
   - TransparentFX
