@@ -14,16 +14,29 @@ public class text_script : MonoBehaviour {
 		if(textFile != null)
         {
             textLines = textFile.text.Split('\n');
-            theText.text = textLines[currentLine];        }
+            theText.text = textLines[currentLine];
+        }
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-        theText.text = textLines[currentLine];
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (textFile != null)
         {
-            currentLine++;
-            currentLine = currentLine % textLines.Length;
+            textLines = textFile.text.Split('\n');
+            theText.text = textLines[currentLine];
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                currentLine++;
+                currentLine = currentLine % textLines.Length;
+            }
         }
+    }
+    public void RecieveText(TextAsset t)
+    {
+        textFile = t;
+    }
+    public void NoSignal()
+    {
+        textFile = null;
     }
 }

@@ -20,7 +20,7 @@ public class mono_player_movement : MonoBehaviour {
 
 	bool running;
 
-	Vector3 moveVec; // tracks rigidbody movement
+    Vector3 moveVec; // tracks rigidbody movement
 
 	public Camera mainCamera; // Holds the main camera. This allows the player script to tell it when to move.
 
@@ -30,7 +30,6 @@ public class mono_player_movement : MonoBehaviour {
 		running = false;
 	}
 	void Update(){
-
 		// Directional Movement Controls
 
 		inputX = Input.GetAxis ("Horizontal"); // A/D, LeftArrow/RightArrow

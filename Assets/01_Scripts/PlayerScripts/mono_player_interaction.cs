@@ -15,7 +15,9 @@ public class mono_player_interaction : MonoBehaviour {
 	// Cell Bars UI
 	public GameObject[] cellBarsUI;
 
-	public bool inDialogue;
+    public text_script TextManager;
+
+    public bool inDialogue;
 
 	// Use this for initialization
 	void Start () {
@@ -150,7 +152,13 @@ public class mono_player_interaction : MonoBehaviour {
 				}
 				if (nearbyInteractables [i].tag.Trim ().Equals ("CellZoneHigh".Trim ())) {
 					cellBarsUI [2].SetActive (true);
-				}
+                    
+                    TextAsset newText = nearbyInteractables[i].GetComponent<TextHandler>().Text;
+                    TextManager.RecieveText(newText);
+                } else
+                {
+                    TextManager.NoSignal();
+                }
 				//return;
 			}
 			
