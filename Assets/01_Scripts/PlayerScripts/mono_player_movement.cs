@@ -50,9 +50,9 @@ public class mono_player_movement : MonoBehaviour {
 
 		if (inputX != 0 && inputY != 0) { // Slow you down a bit for diagonal movement - feels more natural.
 			if (running) {
-				currentMoveSpeed = runSpeed * .8f;
+				currentMoveSpeed = runSpeed * .9f;
 			} else {
-				currentMoveSpeed = walkSpeed * .8f;
+				currentMoveSpeed = walkSpeed * .9f;
 			}
 		} else {
 			if (running) {
