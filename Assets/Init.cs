@@ -9,7 +9,7 @@ public class Init : MonoBehaviour{
     public static int num_scenes = 3;
     public static int[] events = { 0, 1, 1 };
     public static bool[][] activezones = new bool[num_scenes][];
-<<<<<<< HEAD
+
     private void Awake()
     {
         FirstRun();
@@ -35,7 +35,7 @@ public class Init : MonoBehaviour{
             }
             first = false;
         }
-=======
+
     private void Awake()
     {
         FirstRun();
@@ -61,6 +61,5 @@ public class Init : MonoBehaviour{
             }
             first = false;
         }
->>>>>>> c4e6adef46cf5b088cf0aee3a0fd4ca6e4e6a87d
     }
 }
