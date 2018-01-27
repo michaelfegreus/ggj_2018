@@ -131,8 +131,7 @@ public class mono_player_interaction : MonoBehaviour {
 		// Turn off all of the bars here. They turn on if corresponding trigger volumes are found.
 		for (int i = 0; i < cellBarsUI.Length; i++) {
 			cellBarsUI [i].SetActive (false);
-		}		
-
+		}
 		for (int i = 0; i < nearbyInteractables.Length; i++) {
 			if (nearbyInteractables [i] != null) {
 				// In case the item was deactivated, but not destroyed (i.e. Key Items), take it out of the array.
@@ -143,30 +142,41 @@ public class mono_player_interaction : MonoBehaviour {
 				}
 				// UI on!
 				exclamationUI.SetActive (true);
-				
-				if (nearbyInteractables [i].tag.Trim ().Equals ("CellZoneLow".Trim ())) {
-					cellBarsUI [0].SetActive (true);
-				}
-				if (nearbyInteractables [i].tag.Trim ().Equals ("CellZoneMed".Trim ())) {
-					cellBarsUI [1].SetActive (true);
-				}
-				if (nearbyInteractables [i].tag.Trim ().Equals ("CellZoneHigh".Trim ())) {
-					cellBarsUI [2].SetActive (true);
+
+                TextManager.NoSignal();
+
+                if (nearbyInteractables [i].tag.Trim ().Equals ("CellZoneHigh".Trim ()))
+                {
+					cellBarsUI [3].SetActive (true);
                     
                     TextAsset newText = nearbyInteractables[i].GetComponent<TextHandler>().Text;
                     TextManager.RecieveText(newText);
-                } else
+                    for (int j = 0; j < 3; j++)
+                    {
+                        cellBarsUI[j].SetActive(false);
+                    }
+                }
+                else if (!cellBarsUI[3].activeSelf && nearbyInteractables [i].tag.Trim ().Equals ("CellZoneMed".Trim ()))
                 {
-                    TextManager.NoSignal();
+					cellBarsUI [2].SetActive (true);
+                    cellBarsUI [1].SetActive(false);
+                }
+                else if (!cellBarsUI[3].activeSelf && !cellBarsUI[2].activeSelf && nearbyInteractables[i].tag.Trim().Equals("CellZoneLow".Trim()))
+                {
+                    cellBarsUI [1].SetActive(true);
+                }
+                else
+                {
+                    
                 }
 				//return;
 			}
 			
 		}
 		if (interactablesEmpty) {
-			// UI off
-			exclamationUI.SetActive (false);
-		}
+            // UI off
+            cellBarsUI[0].SetActive(true);
+        }
 	}
 
 	public void DeactivateExclamationUI(){

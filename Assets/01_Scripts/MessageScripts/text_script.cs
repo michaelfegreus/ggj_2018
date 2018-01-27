@@ -16,6 +16,10 @@ public class text_script : MonoBehaviour {
             textLines = textFile.text.Split('\n');
             theText.text = textLines[currentLine];
         }
+        else
+        {
+            theText.text = "";
+        }
 	}
 
 	// Update is called once per frame
@@ -29,6 +33,10 @@ public class text_script : MonoBehaviour {
                 currentLine++;
                 currentLine = currentLine % textLines.Length;
             }
+        }
+        else
+        {
+            theText.text = "";
         }
     }
     public void RecieveText(TextAsset t)
