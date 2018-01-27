@@ -11,7 +11,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/02_Scenes/test_player_movement_v1.unity
     guid: 2154747a479ded24e9d1f937181ef227
-<<<<<<< HEAD
   - enabled: 0
     path: Assets/02_Scenes/follow_camera.unity
     guid: 65e8d521d85e57441a2c71fdf6a8d3b4
@@ -30,8 +29,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/02_Scenes/BuildScenes/SC06_collegeroad_v1.unity
     guid: e585f08731e65204f98f1958c9354b86
-=======
   - enabled: 1
     path: Assets/02_Scenes/follow_camera.unity
     guid: 65e8d521d85e57441a2c71fdf6a8d3b4
->>>>>>> c4e6adef46cf5b088cf0aee3a0fd4ca6e4e6a87d
