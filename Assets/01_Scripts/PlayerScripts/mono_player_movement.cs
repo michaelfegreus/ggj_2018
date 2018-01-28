@@ -25,8 +25,10 @@ public class mono_player_movement : MonoBehaviour {
 	public Camera mainCamera; // Holds the main camera. This allows the player script to tell it when to move.
 
 	void Start () {
-        this.transform.position = GameObject.Find("Exit" + Init.spawnLocation).transform.position + new Vector3(1,0);
-        rbody = GetComponent<Rigidbody2D> ();
+		if (GameObject.Find ("Exit" + Init.spawnLocation) != null) {
+			this.transform.position = GameObject.Find ("Exit" + Init.spawnLocation).transform.position;
+		}
+		rbody = GetComponent<Rigidbody2D> ();
 		currentMoveSpeed = targetMoveSpeed;
 		running = false;
 	}

@@ -11,17 +11,21 @@ public class text_script : MonoBehaviour {
     public Text theText;
     public mono_player_interaction player;
     private int currentLine = 0;
-    private bool notify = true;
+    public bool notify = true;
+	private int zoneNum;
+    public float textActiveTime;
 	// Use this for initialization
 	void Start () {
 		if(textFile != null)
         {
             //textLines = textFile.text.Split('\n');
+			textBox.SetActive(true);
             theText.text = textFile.text;
             StartCoroutine(DisplayText());
         }
         else
         {
+			textBox.SetActive(false);
             theText.text = "";
         }
 	}
@@ -33,6 +37,8 @@ public class text_script : MonoBehaviour {
             //textLines = textFile.text.Split('\n');
             //textLines[0] = textFile.text;
             //theText.text = textLines[currentLine];
+			textBox.SetActive(true);
+			print ("diplay");
             theText.text = textFile.text;
             StartCoroutine(DisplayText());
             StartCoroutine(Notify());
@@ -42,7 +48,7 @@ public class text_script : MonoBehaviour {
             }
             if (currentLine >= 1)
             {
-                player.DeactivateZone();
+				player.DeactivateZone(zoneNum);
                 NoSignal();
             }
         }
@@ -63,17 +69,18 @@ public class text_script : MonoBehaviour {
     }
     IEnumerator DisplayText()
     {
-        yield return new WaitForSeconds(5);
-        player.DeactivateZone();
-        notify = true;
-        NoSignal();
+		int z = zoneNum;
+        yield return new WaitForSeconds(textActiveTime);
+        player.DeactivateZone(z);
     }
-    public void RecieveText(TextAsset t)
+	public void RecieveText(TextAsset t, int zone)
     {
         textFile = t;
+		zoneNum = zone;
     }
     public void NoSignal()
     {
+		textBox.SetActive(false);
         textFile = null;
     }
 }

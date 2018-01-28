@@ -123,16 +123,22 @@ public class mono_player_interaction : MonoBehaviour {
 		}
 		return nearestObjectIndex;
 	}
-    public void DeactivateZone()
+	public void DeactivateZone(int zone)
     {
-        for (int i = 0; i < nearbyInteractables.Length; i++)
-        {
-            if (nearbyInteractables[i] != null)
-            {
-                Init.activezones[SceneManager.GetActiveScene().buildIndex][(int) nearbyInteractables[i].transform.parent.name[8] - 48] = false;
-                nearbyInteractables[i].SetActive(false);
-            }
-        }
+		if (GameObject.Find ("CellZone" + zone) != null) {
+			GameObject.Find ("CellZone" + zone).SetActiveRecursively (false);
+			Init.activezones [SceneManager.GetActiveScene ().buildIndex] [zone] = false;
+			TextManager.NoSignal();
+			TextManager.notify = true;
+		}
+        //for (int i = 0; i < nearbyInteractables.Length; i++)
+        //{
+            //if (nearbyInteractables[i] != null)
+            //{
+                //Init.activezones[SceneManager.GetActiveScene().buildIndex][(int) nearbyInteractables[i].transform.parent.name[8] - 48] = false;
+                //nearbyInteractables[i].SetActive(false);
+            //}
+       // }
     }
     // If there are no nearby interactable objects, turn off the exclamation object UI.
     void CheckExclamationUI() {
@@ -164,14 +170,14 @@ public class mono_player_interaction : MonoBehaviour {
 				// UI on!
 				exclamationUI.SetActive (true);
 
-                TextManager.NoSignal();
+                //TextManager.NoSignal();
 
                 if (nearbyInteractables [i].tag.Trim ().Equals ("CellZoneHigh".Trim ()))
                 {
 					cellBarsUI [3].SetActive (true);
 
                     TextAsset newText = nearbyInteractables[i].GetComponent<TextHandler>().Text;
-                    TextManager.RecieveText(newText);
+				TextManager.RecieveText(newText, (int) nearbyInteractables[i].transform.parent.name[8] - 48);
                     for (int j = 0; j < 3; j++)
                     {
                         cellBarsUI[j].SetActive(false);
