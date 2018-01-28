@@ -13,18 +13,35 @@ public class Init : MonoBehaviour
     public static int spawnLocation = 0;
     public static bool[][] activezones = new bool[num_scenes][];
     public Image img;
+    public static bool end = false;
 
     private void Awake()
     {
+        print(end);
         FirstRun();
         StartCoroutine(FadeImage());
-        for (int j = 0; j < events[SceneManager.GetActiveScene().buildIndex]; j++)
+        if (end)
         {
-            if (!activezones[SceneManager.GetActiveScene().buildIndex][j])
+            if (SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                GameObject.Find("CellZone" + 2).SetActiveRecursively(true);
+            }
+            for (int j = 0; j < events[SceneManager.GetActiveScene().buildIndex]; j++)
             {
                 GameObject.Find("CellZone" + j).SetActiveRecursively(false);
             }
         }
+        else
+        {
+            for (int j = 0; j < events[SceneManager.GetActiveScene().buildIndex]; j++)
+            {
+                if (!activezones[SceneManager.GetActiveScene().buildIndex][j])
+                {
+                    GameObject.Find("CellZone" + j).SetActiveRecursively(false);
+                }
+            }
+        }
+        
     }
     IEnumerator FadeImage()
     {
