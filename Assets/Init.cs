@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Init : MonoBehaviour
 {
@@ -11,10 +12,12 @@ public class Init : MonoBehaviour
     public static int[] events = { 0, 1, 1 };
     public static int spawnLocation = 0;
     public static bool[][] activezones = new bool[num_scenes][];
+    public Image img;
 
     private void Awake()
     {
         FirstRun();
+        StartCoroutine(FadeImage());
         for (int j = 0; j < events[SceneManager.GetActiveScene().buildIndex]; j++)
         {
             if (!activezones[SceneManager.GetActiveScene().buildIndex][j])
@@ -23,7 +26,18 @@ public class Init : MonoBehaviour
             }
         }
     }
-    void FirstRun()
+    IEnumerator FadeImage()
+    {
+        // loop over 1 second backwards
+        for (float i = 1; i >= 0; i -= Time.deltaTime)
+        {
+            // set color with i as alpha
+            img.color = new Color(0, 0, 0, i);
+            yield return null;
+        }
+    }
+
+void FirstRun()
     {
         if (first)
         {
