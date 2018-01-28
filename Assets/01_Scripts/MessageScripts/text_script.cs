@@ -65,6 +65,7 @@ public class text_script : MonoBehaviour {
     {
         yield return new WaitForSeconds(5);
         player.DeactivateZone();
+        notify = true;
         NoSignal();
     }
     public void RecieveText(TextAsset t)
