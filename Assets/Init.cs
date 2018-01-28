@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Init : MonoBehaviour
 {
     public static Init instance = null;
-    private static bool first = true;
+    public static bool first = true;
     public static int num_scenes = 6;
     public static int[] events = { 0, 2, 2, 4, 0, 6, 1}; // Title, House, etc...
     public static int spawnLocation = 0;

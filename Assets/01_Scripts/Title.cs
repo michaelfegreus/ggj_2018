@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class Title : MonoBehaviour {
     public void StartGame()
     {
+        Init.first = true;
+        Init.end = false;
         SceneManager.LoadScene(1);
     }
 }
