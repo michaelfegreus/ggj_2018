@@ -29,6 +29,9 @@ public class NextLevel : MonoBehaviour
         // loop over 1 second
         for (float i = 0; i <= 1; i += Time.deltaTime)
         {
+         // loop over 1 second
+        for (float i = 0; i <= 1; i += Time.deltaTime)
+        { 
             // set color with i as alpha
             img.color = new Color(0, 0, 0, i);
             yield return null;
