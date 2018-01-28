@@ -26,9 +26,6 @@ public class NextLevel : MonoBehaviour
     }
     IEnumerator FadeImage()
     {
-        // loop over 1 second
-        for (float i = 0; i <= 1; i += Time.deltaTime)
-        {
          // loop over 1 second
         for (float i = 0; i <= 1; i += Time.deltaTime)
         { 
