@@ -18,7 +18,7 @@ public class mono_player_movement : MonoBehaviour {
 	float inputLTrigger;
 	float runTriggerPressure = .5f;
 
-	bool running;
+	public bool running;
 
     Vector3 moveVec; // tracks rigidbody movement
 

@@ -57,7 +57,7 @@ public class text_script : MonoBehaviour {
         {
             notify = false;
             GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
             GamePad.SetVibration(PlayerIndex.One, 0.0f, .0f);
         }
     }
