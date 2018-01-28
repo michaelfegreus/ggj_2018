@@ -7,9 +7,11 @@ using UnityEngine.SceneManagement;
 public class NextLevel : MonoBehaviour {
 
 	public int sceneTransitionIndex;
+    public int spawnLocation;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-		SceneManager.LoadScene (sceneTransitionIndex);
+        Init.spawnLocation = spawnLocation;
+        SceneManager.LoadScene (sceneTransitionIndex);
     }
 }

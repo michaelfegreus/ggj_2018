@@ -9,6 +9,7 @@ public class Init : MonoBehaviour
     private static bool first = true;
     public static int num_scenes = 3;
     public static int[] events = { 0, 1, 1 };
+    public static int spawnLocation = 0;
     public static bool[][] activezones = new bool[num_scenes][];
 
     private void Awake()
