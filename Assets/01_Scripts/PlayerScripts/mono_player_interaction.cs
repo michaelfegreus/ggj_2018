@@ -169,7 +169,7 @@ public class mono_player_interaction : MonoBehaviour {
                 if (nearbyInteractables [i].tag.Trim ().Equals ("CellZoneHigh".Trim ()))
                 {
 					cellBarsUI [3].SetActive (true);
-                    
+
                     TextAsset newText = nearbyInteractables[i].GetComponent<TextHandler>().Text;
                     TextManager.RecieveText(newText);
                     for (int j = 0; j < 3; j++)

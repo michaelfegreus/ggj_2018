@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using XInputDotNetPure;
 
 public class text_script : MonoBehaviour {
     public GameObject textBox;
@@ -10,6 +11,7 @@ public class text_script : MonoBehaviour {
     public Text theText;
     public mono_player_interaction player;
     private int currentLine = 0;
+    private bool notify = true;
 	// Use this for initialization
 	void Start () {
 		if(textFile != null)
@@ -33,6 +35,7 @@ public class text_script : MonoBehaviour {
             //theText.text = textLines[currentLine];
             theText.text = textFile.text;
             StartCoroutine(DisplayText());
+            StartCoroutine(Notify());
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 currentLine++;                
@@ -46,6 +49,16 @@ public class text_script : MonoBehaviour {
         else
         {
             theText.text = "";
+        }
+    }
+    IEnumerator Notify()
+    {
+        if (notify)
+        {
+            notify = false;
+            GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
+            yield return new WaitForSeconds(0.5f);
+            GamePad.SetVibration(PlayerIndex.One, 0.0f, .0f);
         }
     }
     IEnumerator DisplayText()
