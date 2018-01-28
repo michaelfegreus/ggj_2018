@@ -14,8 +14,9 @@ public class text_script : MonoBehaviour {
 	void Start () {
 		if(textFile != null)
         {
-            textLines = textFile.text.Split('\n');
-            theText.text = textLines[currentLine];
+            //textLines = textFile.text.Split('\n');
+            theText.text = textFile.text;
+            StartCoroutine(DisplayText());
         }
         else
         {
@@ -27,13 +28,16 @@ public class text_script : MonoBehaviour {
 	void Update () {
         if (textFile != null)
         {
-            textLines = textFile.text.Split('\n');
-            theText.text = textLines[currentLine];
+            //textLines = textFile.text.Split('\n');
+            //textLines[0] = textFile.text;
+            //theText.text = textLines[currentLine];
+            theText.text = textFile.text;
+            StartCoroutine(DisplayText());
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 currentLine++;                
             }
-            if (currentLine >= textLines.Length)
+            if (currentLine >= 1)
             {
                 player.DeactivateZone();
                 NoSignal();
@@ -43,6 +47,12 @@ public class text_script : MonoBehaviour {
         {
             theText.text = "";
         }
+    }
+    IEnumerator DisplayText()
+    {
+        yield return new WaitForSeconds(5);
+        player.DeactivateZone();
+        NoSignal();
     }
     public void RecieveText(TextAsset t)
     {
